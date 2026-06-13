@@ -5,66 +5,9 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 export default function HeroSection() {
-  const canvasRef = useRef(null);
   const sectionRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  // Particle system
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resize();
-    window.addEventListener('resize', resize);
-
-    // Dust particles
-    const particles = Array.from({ length: 60 }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      size: Math.random() * 2 + 0.5,
-      speedX: (Math.random() - 0.5) * 0.3,
-      speedY: (Math.random() - 0.5) * 0.15 - 0.1,
-      opacity: Math.random() * 0.4 + 0.1,
-      pulse: Math.random() * Math.PI * 2,
-    }));
-
-    let animId;
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach((p) => {
-        p.x += p.speedX;
-        p.y += p.speedY;
-        p.pulse += 0.01;
-
-        // Wrap around
-        if (p.x < -10) p.x = canvas.width + 10;
-        if (p.x > canvas.width + 10) p.x = -10;
-        if (p.y < -10) p.y = canvas.height + 10;
-        if (p.y > canvas.height + 10) p.y = -10;
-
-        const flicker = Math.sin(p.pulse) * 0.15 + 0.85;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(200, 195, 188, ${p.opacity * flicker})`;
-        ctx.fill();
-      });
-
-      animId = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      window.removeEventListener('resize', resize);
-      cancelAnimationFrame(animId);
-    };
-  }, []);
 
   // Mouse parallax
   useEffect(() => {
@@ -101,7 +44,7 @@ export default function HeroSection() {
       id="hero"
     >
       {/* Background Image Setup */}
-      <div className="absolute inset-0 z-[0] opacity-30 pointer-events-none">
+      <div className="absolute inset-0 z-[0] opacity-50 pointer-events-none">
         <Image
           src="/images/heroSection-bg.png"
           alt="Campaign Editorial"
@@ -112,12 +55,6 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/40 to-[#0a0a0a]" />
       </div>
 
-      {/* Particle Canvas */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 z-[1]"
-        aria-hidden="true"
-      />
 
       {/* Radial Vignette */}
       <div
