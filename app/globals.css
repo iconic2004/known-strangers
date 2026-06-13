@@ -41,6 +41,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  cursor: none !important;
 }
 
 html {
@@ -345,7 +346,7 @@ html.lenis, html.lenis body {
   .cursor-dot {
     display: none !important;
   }
-  body, a, button {
+  *, body, a, button {
     cursor: auto !important;
   }
 }
