@@ -103,7 +103,7 @@ export default function HeroSection() {
       {/* Background Image Setup */}
       <div className="absolute inset-0 z-[0] opacity-30 pointer-events-none">
         <Image
-          src="/images/editorial-walk.png"
+          src="/images/heroSection-bg.png"
           alt="Campaign Editorial"
           fill
           className="object-cover object-center grayscale-[20%] blur-[2px]"
