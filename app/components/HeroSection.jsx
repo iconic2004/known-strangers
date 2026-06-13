@@ -153,7 +153,7 @@ export default function HeroSection() {
               {known.map((letter, i) => (
                 <motion.span
                   key={`k-${i}`}
-                  className="inline-block text-[clamp(3.5rem,11vw,10rem)] font-light tracking-[0.25em] md:tracking-[0.3em] leading-[0.9] text-[var(--color-text)]"
+                  className="inline-block text-[clamp(2.2rem,11vw,10rem)] font-light tracking-[0.15em] sm:tracking-[0.25em] md:tracking-[0.3em] leading-[0.9] text-[var(--color-text)]"
                   variants={letterVariants}
                   initial="hidden"
                   animate="visible"
@@ -171,7 +171,7 @@ export default function HeroSection() {
               {strangers.map((letter, i) => (
                 <motion.span
                   key={`s-${i}`}
-                  className="inline-block text-[clamp(3.5rem,11vw,10rem)] font-extralight tracking-[0.25em] md:tracking-[0.3em] leading-[0.9] text-[var(--color-text)]"
+                  className="inline-block text-[clamp(2.2rem,11vw,10rem)] font-extralight tracking-[0.15em] sm:tracking-[0.25em] md:tracking-[0.3em] leading-[0.9] text-[var(--color-text)]"
                   variants={letterVariants}
                   initial="hidden"
                   animate="visible"
