@@ -3,57 +3,9 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
+import { products } from '../data/products';
 
-const products = [
-  {
-    name: 'The Commuter',
-    character: 'Character 01',
-    type: 'Heavyweight Oversized Tee',
-    price: '₹1,499',
-    image: '/images/product-commuter.png',
-    description: 'Built for crowded mornings and silent journeys.',
-  },
-  {
-    name: 'The Listener',
-    character: 'Character 02',
-    type: 'Washed Oversized Hoodie',
-    price: '₹2,999',
-    image: '/images/product-listener.png',
-    description: 'For those who hear more than they speak.',
-  },
-  {
-    name: 'The Ghost',
-    character: 'Character 03',
-    type: 'Distressed Crewneck',
-    price: '₹2,499',
-    image: '/images/product-ghost.png',
-    description: 'Present everywhere. Noticed by none.',
-  },
-  {
-    name: 'The Outsider',
-    character: 'Character 04',
-    type: 'Cargo Utility Pants',
-    price: '₹2,799',
-    image: '/images/product-outsider.png',
-    description: 'Belonging is overrated.',
-  },
-  {
-    name: 'The Night Shift',
-    character: 'Character 05',
-    type: 'Oversized Bomber Jacket',
-    price: '₹4,999',
-    image: '/images/product-commuter.png',
-    description: 'When the city belongs to no one.',
-  },
-  {
-    name: 'The Regular',
-    character: 'Character 06',
-    type: 'Essential Basics Set',
-    price: '₹1,999',
-    image: '/images/product-listener.png',
-    description: 'Same place. Same time. Every day.',
-  },
-];
 
 export default function ChaptersSection() {
   const headerRef = useRef(null);
@@ -123,6 +75,7 @@ function ProductCard({ product, index }) {
       }}
       data-cursor="VIEW"
     >
+      <Link href={`/product/${product.id}`} className="block w-full h-full">
       {/* Image */}
       <div className="relative aspect-[3/4] overflow-hidden bg-[var(--color-card)] mb-4">
         <Image
@@ -188,6 +141,7 @@ function ProductCard({ product, index }) {
           {product.price}
         </span>
       </div>
+      </Link>
     </motion.div>
   );
 }

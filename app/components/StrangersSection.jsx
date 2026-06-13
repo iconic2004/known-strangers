@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const strangers = [
   {
@@ -22,24 +23,28 @@ const strangers = [
     message: 'We bought the same coffee.',
     location: 'Andheri',
     isLarge: false,
+    id: 'the-commuter',
   },
   {
     image: '/images/product-ghost.png',
     message: 'Known. Yet unknown.',
     location: 'Lower Parel',
     isLarge: true,
+    id: 'the-ghost',
   },
   {
     image: '/images/product-listener.png',
     message: 'Our eyes met for a second.',
     location: 'Colaba',
     isLarge: false,
+    id: 'the-listener',
   },
   {
     image: '/images/product-outsider.png',
     message: 'Always on the last train.',
     location: 'Dadar',
     isLarge: false,
+    id: 'the-outsider',
   },
 ];
 
@@ -126,17 +131,8 @@ function StrangerCard({ data, index }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
 
-  return (
-    <motion.div
-      ref={ref}
-      className={`group relative overflow-hidden bg-[var(--color-pure-black)] ${
-        data.isLarge ? 'aspect-[3/4]' : 'aspect-square'
-      }`}
-      initial={{ opacity: 0, y: 50, filter: 'blur(10px)' }}
-      animate={isInView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
-      transition={{ duration: 0.8, delay: (index % 2) * 0.15, ease: [0.16, 1, 0.3, 1] }}
-      data-cursor="VIEW"
-    >
+  const CardContent = (
+    <>
       <Image
         src={data.image}
         alt="Stranger moment"
@@ -163,6 +159,27 @@ function StrangerCard({ data, index }) {
           {data.location}
         </span>
       </div>
+    </>
+  );
+
+  return (
+    <motion.div
+      ref={ref}
+      className={`group relative overflow-hidden bg-[var(--color-pure-black)] ${
+        data.isLarge ? 'aspect-[3/4]' : 'aspect-square'
+      }`}
+      initial={{ opacity: 0, y: 50, filter: 'blur(10px)' }}
+      animate={isInView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
+      transition={{ duration: 0.8, delay: (index % 2) * 0.15, ease: [0.16, 1, 0.3, 1] }}
+      data-cursor="VIEW"
+    >
+      {data.id ? (
+        <Link href={`/product/${data.id}`} className="block w-full h-full">
+          {CardContent}
+        </Link>
+      ) : (
+        CardContent
+      )}
     </motion.div>
   );
 }
