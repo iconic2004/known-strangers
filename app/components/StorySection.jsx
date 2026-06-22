@@ -28,7 +28,7 @@ export default function StorySection() {
           <div className="order-2 lg:order-1">
             <h2
               className="mb-8 md:mb-12"
-              style={{ fontFamily: 'var(--font-display)' }}
+              style={{ fontFamily: 'var(--font-heading)' }}
             >
               {lines.map((line, i) => (
                 <span key={i} className="block overflow-hidden">

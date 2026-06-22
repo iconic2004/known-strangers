@@ -19,7 +19,8 @@
   --color-dim: #71717a;
   --color-faint: #3f3f46;
 
-  --font-display: 'Cormorant Garamond', 'Bodoni Moda', Georgia, serif;
+  --font-display: 'The Fright House', 'Cormorant Garamond', 'Bodoni Moda', Georgia, serif;
+  --font-heading: 'Benzin', sans-serif;
   --font-body: 'General Sans', 'Satoshi', 'Inter', -apple-system, sans-serif;
   --font-ui: 'Inter', -apple-system, sans-serif;
 
@@ -28,7 +29,47 @@
   --ease-circ: cubic-bezier(0, 0.55, 0.45, 1);
 }
 
+/* ---------- Light Theme Overrides ---------- */
+body.light-theme {
+  --color-bg: #FFFFFF;
+  --color-bg-secondary: #F4F4F5;
+  --color-card: #FAFAFA;
+  --color-card-hover: #F4F4F5;
+  --color-text: #09090B;
+  --color-muted: #52525B;
+  --color-accent: #18181B;
+  --color-border: #E4E4E7;
+  --color-border-light: #D4D4D8;
+  --color-pure-black: #FFFFFF;
+  --color-dim: #71717A;
+  --color-faint: #E4E4E7;
+}
+
+body.light-theme .nav-logo-white {
+  opacity: 0 !important;
+}
+
+body.light-theme .nav-logo-black {
+  opacity: 1 !important;
+}
+
 /* ---------- Font Imports ---------- */
+@font-face {
+  font-family: 'The Fright House';
+  src: url('/fonts/TheFrightHouseDEMO.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Benzin';
+  src: url('/fonts/Benzin-Semibold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 @font-face {
   font-family: 'General Sans';
   src: url('https://cdn.fontshare.com/wf/ULXXB3RS6UO5SJWQYJEMKDQZ3SIG6OGQ/B3QOGJSHRVTPKKQYQIRBIHSYQTAVUVUA/D4LWGN7NCQVNMXQZXF44BXSGKR6WFF2G.woff2') format('woff2');
@@ -57,6 +98,12 @@ body {
   color: var(--color-text);
   font-family: var(--font-body);
   overflow-x: hidden;
+  transition: background-color 0.8s ease, color 0.8s ease;
+}
+
+/* ---------- Heading Font: Benzin Semibold ---------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
 }
 
 ::selection {
@@ -90,22 +137,26 @@ img {
 /* ---------- Grain Overlay ---------- */
 .grain-overlay {
   position: fixed;
-  top: -100%;
-  left: -100%;
-  width: 300%;
-  height: 300%;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
   z-index: 9990;
   pointer-events: none;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  animation: grainLoop 0.4s steps(4) infinite;
+  opacity: 0.025;
+  will-change: transform;
+  contain: strict;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  animation: grainLoop 8s steps(6) infinite;
 }
 
 @keyframes grainLoop {
   0%   { transform: translate(0, 0); }
-  25%  { transform: translate(-5%, -5%); }
-  50%  { transform: translate(3%, -3%); }
-  75%  { transform: translate(-2%, 2%); }
+  17%  { transform: translate(-3%, -3%); }
+  33%  { transform: translate(2%, -2%); }
+  50%  { transform: translate(-2%, 2%); }
+  67%  { transform: translate(3%, 0%); }
+  83%  { transform: translate(-1%, 3%); }
   100% { transform: translate(0, 0); }
 }
 
@@ -120,7 +171,7 @@ img {
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-  transform: translate(-50%, -50%);
+  will-change: transform;
   transition: width 0.35s var(--ease-expo),
               height 0.35s var(--ease-expo),
               background 0.35s ease,
@@ -168,7 +219,7 @@ img {
   border-radius: 50%;
   pointer-events: none;
   z-index: 10000;
-  transform: translate(-50%, -50%);
+  will-change: transform;
   mix-blend-mode: difference;
 }
 

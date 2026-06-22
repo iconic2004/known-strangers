@@ -1,24 +1,54 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 export default function HeroSection() {
   const sectionRef = useRef(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const glowRef = useRef(null);
+  const contentRef = useRef(null);
+  // Store mouse position in a ref — no re-renders
+  const mousePosRef = useRef({ x: 0, y: 0 });
 
-
-  // Mouse parallax
+  // Mouse parallax via direct DOM manipulation (no useState re-renders)
   useEffect(() => {
     const handleMouse = (e) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 2;
       const y = (e.clientY / window.innerHeight - 0.5) * 2;
-      setMousePos({ x, y });
+      mousePosRef.current = { x, y };
+
+      if (glowRef.current) {
+        glowRef.current.style.left = `calc(50% + ${x * 80}px)`;
+        glowRef.current.style.top = `calc(50% + ${y * 80}px)`;
+      }
+      if (contentRef.current) {
+        contentRef.current.style.transform = `translate(${x * -8}px, ${y * -8}px)`;
+      }
     };
 
-    window.addEventListener('mousemove', handleMouse);
-    return () => window.removeEventListener('mousemove', handleMouse);
+    window.addEventListener('mousemove', handleMouse, { passive: true });
+    
+    // Theme switching observer
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          document.body.classList.add('light-theme');
+        } else {
+          document.body.classList.remove('light-theme');
+        }
+      },
+      { threshold: 0.1 }
+    );
+    
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouse);
+      observer.disconnect();
+    };
   }, []);
 
   const letterVariants = {
@@ -66,31 +96,32 @@ export default function HeroSection() {
 
       {/* Ambient Light Glow */}
       <div
-        className="absolute w-[600px] h-[600px] rounded-full pointer-events-none z-[1] transition-all duration-1000"
+        ref={glowRef}
+        className="absolute w-[600px] h-[600px] rounded-full pointer-events-none z-[1]"
         style={{
           background: 'radial-gradient(circle, rgba(200,195,188,0.03) 0%, transparent 70%)',
-          left: `calc(50% + ${mousePos.x * 80}px)`,
-          top: `calc(50% + ${mousePos.y * 80}px)`,
+          left: '50%',
+          top: '50%',
           transform: 'translate(-50%, -50%)',
+          willChange: 'left, top',
         }}
       />
 
       {/* Hero Content */}
       <motion.div
+        ref={contentRef}
         className="relative z-[3] text-center"
-        style={{
-          transform: `translate(${mousePos.x * -8}px, ${mousePos.y * -8}px)`,
-        }}
+        style={{ willChange: 'transform' }}
       >
         {/* Logo */}
-        <h1 className="mb-6 md:mb-8" style={{ fontFamily: 'var(--font-display)' }}>
+        <h1 className="mb-6 md:mb-8" style={{ fontFamily: 'var(--font-heading)' }}>
           {/* KNOWN */}
           <span className="block overflow-hidden">
             <span className="flex justify-center">
               {known.map((letter, i) => (
                 <motion.span
                   key={`k-${i}`}
-                  className="inline-block text-[clamp(2.2rem,11vw,10rem)] font-light tracking-[0.15em] sm:tracking-[0.25em] md:tracking-[0.3em] leading-[0.9] text-[var(--color-text)]"
+                  className="inline-block text-[clamp(1.5rem,8.5vw,10rem)] font-light tracking-[0.1em] sm:tracking-[0.15em] md:tracking-[0.25em] leading-[0.9] text-[#F5F5F5]"
                   variants={letterVariants}
                   initial="hidden"
                   animate="visible"
@@ -108,7 +139,7 @@ export default function HeroSection() {
               {strangers.map((letter, i) => (
                 <motion.span
                   key={`s-${i}`}
-                  className="inline-block text-[clamp(2.2rem,11vw,10rem)] font-extralight tracking-[0.15em] sm:tracking-[0.25em] md:tracking-[0.3em] leading-[0.9] text-[var(--color-text)]"
+                  className="inline-block text-[clamp(1.5rem,8.5vw,10rem)] font-extralight tracking-[0.1em] sm:tracking-[0.15em] md:tracking-[0.25em] leading-[0.9] text-[#F5F5F5]"
                   variants={letterVariants}
                   initial="hidden"
                   animate="visible"
@@ -124,7 +155,7 @@ export default function HeroSection() {
         {/* Subtitle */}
         <motion.p
           className="text-[clamp(0.6rem,1.1vw,0.8rem)] font-light tracking-[0.35em] uppercase mb-10 md:mb-14"
-          style={{ color: 'var(--color-muted)', fontFamily: 'var(--font-body)' }}
+          style={{ color: '#A1A1AA', fontFamily: 'var(--font-body)' }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 0.7, y: 0 }}
           transition={{ duration: 1, delay: 2.5, ease: [0.16, 1, 0.3, 1] }}
@@ -140,7 +171,7 @@ export default function HeroSection() {
         >
           <a
             href="#chapters"
-            className="magnetic-btn border border-white/20 px-10 py-4 md:px-14 md:py-5 text-[0.6rem] md:text-[0.65rem] font-medium tracking-[0.4em] uppercase text-[var(--color-text)] hover:text-[var(--color-bg)] transition-colors duration-500 inline-flex"
+            className="magnetic-btn border border-white/20 px-10 py-4 md:px-14 md:py-5 text-[0.6rem] md:text-[0.65rem] font-medium tracking-[0.4em] uppercase text-[#F5F5F5] hover:text-black transition-colors duration-500 inline-flex"
             style={{ fontFamily: 'var(--font-ui)' }}
             data-cursor="ENTER"
             onClick={(e) => {
@@ -161,13 +192,13 @@ export default function HeroSection() {
         transition={{ delay: 4, duration: 1 }}
       >
         <span
-          className="text-[0.5rem] tracking-[0.3em] uppercase"
-          style={{ color: 'var(--color-dim)', fontFamily: 'var(--font-ui)' }}
+          className="text-[0.5rem] tracking-[0.3em] uppercase text-[#71717a]"
+          style={{ fontFamily: 'var(--font-ui)' }}
         >
           Scroll
         </span>
         <motion.div
-          className="w-px h-8 bg-gradient-to-b from-[var(--color-muted)] to-transparent"
+          className="w-px h-8 bg-gradient-to-b from-[#A1A1AA] to-transparent"
           animate={{ scaleY: [0.4, 1, 0.4], opacity: [0.3, 0.8, 0.3] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
         />

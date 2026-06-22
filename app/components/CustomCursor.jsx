@@ -18,12 +18,13 @@ export default function CustomCursor() {
     const dot = dotRef.current;
     if (!cursor || !dot) return;
 
+    let rafId = 0;
+
     const onMove = (e) => {
       target.current.x = e.clientX;
       target.current.y = e.clientY;
-      // Dot follows immediately
-      dot.style.left = `${e.clientX}px`;
-      dot.style.top = `${e.clientY}px`;
+      // Dot follows immediately via transform (GPU-accelerated)
+      dot.style.transform = `translate(${e.clientX - 2}px, ${e.clientY - 2}px)`;
     };
 
     const lerp = (a, b, n) => a + (b - a) * n;
@@ -31,9 +32,8 @@ export default function CustomCursor() {
     const animate = () => {
       pos.current.x = lerp(pos.current.x, target.current.x, 0.12);
       pos.current.y = lerp(pos.current.y, target.current.y, 0.12);
-      cursor.style.left = `${pos.current.x}px`;
-      cursor.style.top = `${pos.current.y}px`;
-      requestAnimationFrame(animate);
+      cursor.style.transform = `translate(${pos.current.x - 9}px, ${pos.current.y - 9}px)`;
+      rafId = requestAnimationFrame(animate);
     };
 
     const onEnter = (e) => {
@@ -52,17 +52,17 @@ export default function CustomCursor() {
       }
     };
 
-    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mousemove', onMove, { passive: true });
     document.addEventListener('mouseover', onEnter);
     document.addEventListener('mouseout', onLeave);
     
-    const raf = requestAnimationFrame(animate);
+    rafId = requestAnimationFrame(animate);
 
     return () => {
       document.removeEventListener('mousemove', onMove);
       document.removeEventListener('mouseover', onEnter);
       document.removeEventListener('mouseout', onLeave);
-      cancelAnimationFrame(raf);
+      cancelAnimationFrame(rafId);
     };
   }, []);
 

@@ -4,11 +4,11 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 
+
 const navLinks = [
   { label: 'Shop', href: '#chapters' },
   { label: 'Chapters', href: '#chapters' },
   { label: 'The Strangers', href: '#strangers' },
-  { label: 'Journal', href: '#journal' },
   { label: 'About', href: '#about' },
 ];
 
@@ -22,7 +22,6 @@ export default function Navigation() {
     const handleScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 80);
-      setHidden(y > lastScroll.current && y > 400);
       lastScroll.current = y;
     };
 
@@ -44,29 +43,32 @@ export default function Navigation() {
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 w-full z-[100] transition-all duration-700 ${
-          scrolled 
-            ? 'bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-white/[0.03]' 
+        className={`fixed top-0 left-0 w-full z-[100] transition-colors duration-700 ${scrolled
+            ? 'bg-[var(--color-bg)]/90 backdrop-blur-xl border-b border-[var(--color-border)]'
             : 'bg-transparent'
-        } ${hidden ? '-translate-y-full' : 'translate-y-0'}`}
+          }`}
         initial={{ y: -100 }}
-        animate={{ y: hidden ? -100 : 0 }}
+        animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="flex items-center justify-between h-20 px-6 md:px-10 lg:px-16 max-w-[1800px] mx-auto">
           {/* Logo */}
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="relative z-[101]"
             data-cursor="HOME"
           >
-            <div className="font-[var(--font-display)]" style={{ fontFamily: 'var(--font-display)' }}>
-              <span className="block text-[0.75rem] md:text-[0.85rem] font-normal tracking-[0.4em] uppercase leading-tight text-[var(--color-text)]">
-                Known
-              </span>
-              <span className="block text-[0.75rem] md:text-[0.85rem] font-light tracking-[0.4em] uppercase leading-tight text-[var(--color-text)]">
-                Strangers
-              </span>
+            <div className="relative font-[var(--font-heading)] flex items-center" style={{ fontFamily: 'var(--font-heading)' }}>
+              <img
+                src="/images/White-logo.svg"
+                alt="Known Strangers Logo"
+                className="h-34 w-auto transition-opacity duration-300 opacity-100 nav-logo-white"
+              />
+              <img
+                src="/images/Black-logo.svg"
+                alt="Known Strangers Logo"
+                className="h-34 w-auto absolute top-0 left-0 transition-opacity duration-300 opacity-0 nav-logo-black pointer-events-none"
+              />
             </div>
           </Link>
 

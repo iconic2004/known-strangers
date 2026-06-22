@@ -1,20 +1,13 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 
 export default function FeaturedCampaign() {
   const containerRef = useRef(null);
   const textRef = useRef(null);
   const textInView = useInView(textRef, { once: true, margin: '-100px' });
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const imageY = useTransform(scrollYProgress, [0, 1], ['-15%', '15%']);
 
   return (
     <section
@@ -22,10 +15,7 @@ export default function FeaturedCampaign() {
       className="relative w-full h-[90vh] md:h-screen overflow-hidden"
       id="campaign"
     >
-      <motion.div 
-        className="absolute inset-0 w-full h-[130%]"
-        style={{ y: imageY }}
-      >
+      <div className="absolute inset-0 w-full h-full">
         <Image
           src="/images/editorial-walk.png"
           alt="Campaign Editorial"
@@ -33,7 +23,7 @@ export default function FeaturedCampaign() {
           className="object-cover grayscale-[20%] contrast-[1.05] brightness-[0.7]"
           sizes="100vw"
         />
-      </motion.div>
+      </div>
       
       {/* Overlay Gradient */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />

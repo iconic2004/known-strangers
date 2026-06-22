@@ -18,7 +18,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="has-scroll-smooth">
-      <body className={`${inter.variable} antialiased bg-[#0a0a0a] text-[#F5F5F5] min-h-screen`}>
+      <body className={`${inter.variable} antialiased bg-[var(--color-bg)] text-[var(--color-text)] min-h-screen`}>
         <LoadingScreen />
         <GrainOverlay />
         <CustomCursor />
