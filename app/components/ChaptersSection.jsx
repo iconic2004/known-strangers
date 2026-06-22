@@ -13,7 +13,7 @@ export default function ChaptersSection() {
 
   return (
     <section
-      className="relative py-24 md:py-40 px-6 md:px-10 lg:px-16 overflow-hidden"
+      className="relative py-24 md:py-40 px-4 md:px-10 lg:px-16 overflow-hidden"
       style={{ background: 'var(--color-bg)' }}
       id="chapters"
     >
@@ -49,7 +49,7 @@ export default function ChaptersSection() {
       </div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-[1400px] mx-auto">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8 max-w-[1400px] mx-auto">
         {products.map((product, i) => (
           <ProductCard key={product.name} product={product} index={i} />
         ))}
@@ -77,13 +77,13 @@ function ProductCard({ product, index }) {
     >
       <Link href={`/product/${product.id}`} className="block w-full h-full">
       {/* Image */}
-      <div className="relative aspect-[3/4] overflow-hidden bg-[var(--color-card)] mb-4">
+      <div className="relative aspect-[3/4] overflow-hidden bg-transparent mb-3 md:mb-4">
         <Image
           src={product.image}
           alt={product.name}
           fill
           className="object-cover transition-all duration-[1.2s] ease-[var(--ease-expo)] grayscale-[15%] brightness-[0.95] group-hover:scale-[1.06] group-hover:grayscale-0 group-hover:brightness-100"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 33vw"
         />
 
         {/* Hover Overlay */}
@@ -105,9 +105,9 @@ function ProductCard({ product, index }) {
           </p>
         </div>
 
-        {/* Quick Add */}
+        {/* Quick Add (Desktop) */}
         <button
-          className="absolute top-3 right-3 w-9 h-9 border border-white/30 flex items-center justify-center opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-400 ease-[var(--ease-expo)] hover:bg-[var(--color-text)] hover:text-[var(--color-bg)] text-[var(--color-text)]"
+          className="hidden md:flex absolute top-3 right-3 w-9 h-9 border border-white/30 items-center justify-center opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-400 ease-[var(--ease-expo)] hover:bg-[var(--color-text)] hover:text-[var(--color-bg)] text-[var(--color-text)]"
           aria-label={`Add ${product.name} to cart`}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -118,16 +118,31 @@ function ProductCard({ product, index }) {
       </div>
 
       {/* Product Info */}
-      <div className="flex items-start justify-between gap-4">
-        <div>
+      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-1 md:gap-4">
+        <div className="flex items-center justify-between w-full md:w-auto md:block">
           <h3
-            className="text-[1rem] md:text-[1.1rem] font-light tracking-[0.05em]"
+            className="text-[0.7rem] sm:text-[0.8rem] md:text-[1.1rem] font-medium md:font-light tracking-[0.05em] uppercase md:normal-case text-left"
             style={{ fontFamily: 'var(--font-display)', color: 'var(--color-text)' }}
           >
             {product.name}
           </h3>
+          
+          {/* Quick Add (Mobile) */}
+          <button
+            className="md:hidden flex items-center justify-center text-[var(--color-text)] active:scale-95 transition-transform p-1"
+            aria-label={`Add ${product.name} to cart`}
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+          </button>
+
           <p
-            className="text-[0.65rem] tracking-[0.15em] uppercase mt-1"
+            className="hidden md:block text-[0.65rem] tracking-[0.15em] uppercase mt-1"
             style={{ color: 'var(--color-dim)', fontFamily: 'var(--font-ui)' }}
           >
             {product.type}
@@ -135,7 +150,7 @@ function ProductCard({ product, index }) {
         </div>
 
         <span
-          className="text-[0.75rem] tracking-[0.1em] font-light"
+          className="text-[0.65rem] sm:text-[0.7rem] md:text-[0.75rem] tracking-[0.05em] md:tracking-[0.1em] font-light text-left md:text-right mt-0.5 md:mt-0"
           style={{ color: 'var(--color-muted)', fontFamily: 'var(--font-ui)' }}
         >
           {product.price}
