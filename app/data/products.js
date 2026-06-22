@@ -6,6 +6,7 @@ export const products = [
     type: 'Heavyweight Oversized Tee',
     price: '₹1,499',
     image: '/images/product-commuter.png',
+    hoverImage: '/images/editorial-walk.png',
     description: 'Built for crowded mornings and silent journeys.',
   },
   {
@@ -15,6 +16,7 @@ export const products = [
     type: 'Washed Oversized Hoodie',
     price: '₹2,999',
     image: '/images/product-listener.png',
+    hoverImage: '/images/hero-editorial.png',
     description: 'For those who hear more than they speak.',
   },
   {
@@ -24,6 +26,7 @@ export const products = [
     type: 'Distressed Crewneck',
     price: '₹2,499',
     image: '/images/product-ghost.png',
+    hoverImage: '/images/heroSection-bg.png',
     description: 'Present everywhere. Noticed by none.',
   },
   {
@@ -33,6 +36,7 @@ export const products = [
     type: 'Cargo Utility Pants',
     price: '₹2,799',
     image: '/images/product-outsider.png',
+    hoverImage: '/images/editorial-walk.png',
     description: 'Belonging is overrated.',
   },
   {
@@ -42,6 +46,7 @@ export const products = [
     type: 'Oversized Bomber Jacket',
     price: '₹4,999',
     image: '/images/product-commuter.png',
+    hoverImage: '/images/hero-editorial.png',
     description: 'When the city belongs to no one.',
   },
   {
@@ -51,6 +56,7 @@ export const products = [
     type: 'Essential Basics Set',
     price: '₹1,999',
     image: '/images/product-listener.png',
+    hoverImage: '/images/heroSection-bg.png',
     description: 'Same place. Same time. Every day.',
   },
 ];

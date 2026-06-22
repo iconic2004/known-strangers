@@ -21,7 +21,7 @@ export default function Navigation() {
   useEffect(() => {
     const handleScroll = () => {
       const y = window.scrollY;
-      setScrolled(y > 80);
+      setScrolled(y > window.innerHeight - 100);
       lastScroll.current = y;
     };
 

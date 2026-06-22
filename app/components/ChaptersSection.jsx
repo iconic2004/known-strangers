@@ -78,32 +78,25 @@ function ProductCard({ product, index }) {
       <Link href={`/product/${product.id}`} className="block w-full h-full">
       {/* Image */}
       <div className="relative aspect-[3/4] overflow-hidden bg-transparent mb-3 md:mb-4">
+        {/* Primary Image */}
         <Image
           src={product.image}
           alt={product.name}
           fill
-          className="object-cover transition-all duration-[1.2s] ease-[var(--ease-expo)] grayscale-[15%] brightness-[0.95] group-hover:scale-[1.06] group-hover:grayscale-0 group-hover:brightness-100"
+          className="object-cover transition-all duration-700 ease-[var(--ease-expo)] grayscale-[10%] brightness-[0.95] group-hover:opacity-0"
           sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 33vw"
         />
 
-        {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-        {/* Hover Info */}
-        <div className="absolute bottom-0 left-0 w-full p-5 md:p-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-[var(--ease-expo)]">
-          <p
-            className="text-[0.6rem] tracking-[0.3em] uppercase mb-1"
-            style={{ color: 'var(--color-muted)', fontFamily: 'var(--font-ui)' }}
-          >
-            {product.character}
-          </p>
-          <p
-            className="text-[0.78rem] font-light italic leading-[1.6]"
-            style={{ color: 'var(--color-accent)', fontFamily: 'var(--font-display)' }}
-          >
-            &quot;{product.description}&quot;
-          </p>
-        </div>
+        {/* Secondary Hover Image */}
+        {product.hoverImage && (
+          <Image
+            src={product.hoverImage}
+            alt={`${product.name} lifestyle`}
+            fill
+            className="object-cover transition-all duration-[1.2s] ease-[var(--ease-expo)] opacity-0 group-hover:opacity-100 group-hover:scale-[1.05]"
+            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 33vw"
+          />
+        )}
 
         {/* Quick Add (Desktop) */}
         <button
@@ -121,8 +114,8 @@ function ProductCard({ product, index }) {
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-1 md:gap-4">
         <div className="flex items-center justify-between w-full md:w-auto md:block">
           <h3
-            className="text-[0.7rem] sm:text-[0.8rem] md:text-[1.1rem] font-medium md:font-light tracking-[0.05em] uppercase md:normal-case text-left"
-            style={{ fontFamily: 'var(--font-display)', color: 'var(--color-text)' }}
+            className="text-[0.7rem] sm:text-[0.8rem] md:text-[0.9rem] font-medium md:font-medium tracking-[0.05em] uppercase text-left"
+            style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-text)' }}
           >
             {product.name}
           </h3>
@@ -140,13 +133,6 @@ function ProductCard({ product, index }) {
               <line x1="5" y1="12" x2="19" y2="12" />
             </svg>
           </button>
-
-          <p
-            className="hidden md:block text-[0.65rem] tracking-[0.15em] uppercase mt-1"
-            style={{ color: 'var(--color-dim)', fontFamily: 'var(--font-ui)' }}
-          >
-            {product.type}
-          </p>
         </div>
 
         <span

@@ -160,7 +160,7 @@ export default function HeroSection() {
           animate={{ opacity: 0.7, y: 0 }}
           transition={{ duration: 1, delay: 2.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          For those who belong nowhere and everywhere.
+          Known by many. Understood by few.
         </motion.p>
 
         {/* CTA */}
@@ -171,15 +171,15 @@ export default function HeroSection() {
         >
           <a
             href="#chapters"
-            className="magnetic-btn border border-white/20 px-10 py-4 md:px-14 md:py-5 text-[0.6rem] md:text-[0.65rem] font-medium tracking-[0.4em] uppercase text-[#F5F5F5] hover:text-black transition-colors duration-500 inline-flex"
+            className="magnetic-btn bg-[#F5F5F5] text-black px-12 py-4 md:px-16 md:py-5 text-[0.7rem] md:text-[0.75rem] font-bold tracking-[0.3em] uppercase hover:bg-white transition-colors duration-500 inline-flex items-center justify-center"
             style={{ fontFamily: 'var(--font-ui)' }}
-            data-cursor="ENTER"
+            data-cursor="SHOP"
             onClick={(e) => {
               e.preventDefault();
               document.querySelector('#chapters')?.scrollIntoView({ behavior: 'smooth' });
             }}
           >
-            <span>Enter the Chapter</span>
+            <span>SHOP THE DROP</span>
           </a>
         </motion.div>
       </motion.div>
