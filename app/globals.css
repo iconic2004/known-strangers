@@ -78,7 +78,9 @@ body.light-theme .nav-logo-black {
 }
 
 /* ---------- Base Styles ---------- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -88,8 +90,8 @@ body.light-theme .nav-logo-black {
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scrollbar-width: thin;
-  scrollbar-color: #333 #0a0a0a;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   overflow-x: hidden;
 }
 
@@ -102,7 +104,12 @@ body {
 }
 
 /* ---------- Heading Font: Benzin Semibold ---------- */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
 }
 
@@ -112,26 +119,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
+  display: none;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--color-bg);
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 3px;
-}
-
-a { 
-  color: inherit; 
-  text-decoration: none; 
-}
-
-img { 
-  max-width: 100%; 
-  display: block; 
+img {
+  max-width: 100%;
+  display: block;
 }
 
 /* ---------- Grain Overlay ---------- */
@@ -151,13 +149,33 @@ img {
 }
 
 @keyframes grainLoop {
-  0%   { transform: translate(0, 0); }
-  17%  { transform: translate(-3%, -3%); }
-  33%  { transform: translate(2%, -2%); }
-  50%  { transform: translate(-2%, 2%); }
-  67%  { transform: translate(3%, 0%); }
-  83%  { transform: translate(-1%, 3%); }
-  100% { transform: translate(0, 0); }
+  0% {
+    transform: translate(0, 0);
+  }
+
+  17% {
+    transform: translate(-3%, -3%);
+  }
+
+  33% {
+    transform: translate(2%, -2%);
+  }
+
+  50% {
+    transform: translate(-2%, 2%);
+  }
+
+  67% {
+    transform: translate(3%, 0%);
+  }
+
+  83% {
+    transform: translate(-1%, 3%);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
 }
 
 /* ---------- Custom Cursor ---------- */
@@ -173,10 +191,10 @@ img {
   z-index: 9999;
   will-change: transform;
   transition: width 0.35s var(--ease-expo),
-              height 0.35s var(--ease-expo),
-              background 0.35s ease,
-              border-color 0.35s ease,
-              opacity 0.35s ease;
+    height 0.35s var(--ease-expo),
+    background 0.35s ease,
+    border-color 0.35s ease,
+    opacity 0.35s ease;
   mix-blend-mode: difference;
 }
 
@@ -224,7 +242,8 @@ img {
 }
 
 /* ---------- Smooth Scroll ---------- */
-html.lenis, html.lenis body {
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
@@ -367,8 +386,13 @@ html.lenis, html.lenis body {
 
 /* ---------- Marquee ---------- */
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .marquee-track {
@@ -393,11 +417,16 @@ html.lenis, html.lenis body {
 
 /* ---------- Responsive Cursor Hide ---------- */
 @media (max-width: 768px) {
+
   .custom-cursor,
   .cursor-dot {
     display: none !important;
   }
-  *, body, a, button {
+
+  *,
+  body,
+  a,
+  button {
     cursor: auto !important;
   }
 }
