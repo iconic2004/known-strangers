@@ -213,153 +213,149 @@ export default function Navigation() {
               onClick={() => setMenuOpen(false)}
               className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[200]"
             />
-            {/* White Drawer Panel */}
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'tween', duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed top-0 right-0 h-full w-full md:w-1/2 lg:w-[50%] xl:w-[45%] bg-white text-black z-[201] p-8 md:p-12 flex flex-col justify-between rounded-none border-l border-black/10 overflow-y-auto"
+              className="fixed top-0 right-0 h-full w-full md:w-[450px] bg-white text-black z-[201] p-8 md:p-10 flex flex-col justify-start rounded-none border-l border-black/10 overflow-y-auto"
               style={{ fontFamily: "'Inter', 'Helvetica Neue', sans-serif" }}
             >
               <div>
                 {/* Drawer Header */}
-                <div className="flex items-center justify-between border-b border-black/10 pb-6 mb-12">
-                  <span className=" text-[0.75rem] font-bold tracking-[0.3em] text-black uppercase" style={{ fontFamily: 'var(--font-heading), sans-serif' }}>MENU</span>
+                <div className="flex items-center justify-between mb-16">
+                  <span className="text-[0.7rem] font-bold tracking-[0.25em] text-black uppercase">MENU</span>
                   <button
                     onClick={() => setMenuOpen(false)}
                     className="text-black hover:opacity-60 transition-opacity"
                     aria-label="Close menu"
                   >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-7 h-7">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="w-8 h-8">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                   </button>
                 </div>
 
-                {/* Vertical Navigation Links */}
-                <div className="flex flex-col gap-y-[10px] text-left my-8">
-                  {categories.map((category, idx) => {
-                    const isTopwear = category.label === 'TOPWEAR';
-                    const isActive = activeCategory === category.label;
+                <div className="pl-4 md:pl-8">
+                  {/* Vertical Navigation Links */}
+                  <div className="flex flex-col gap-y-10 text-left mb-20">
+                    {categories.map((category, idx) => {
+                      const isTopwear = category.label === 'TOPWEAR';
+                      const isActive = activeCategory === category.label;
 
-                    return (
-                      <motion.div
-                        key={category.label}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: idx * 0.05 }}
-                        className="flex flex-col"
-                      >
-                        <div className="flex items-center justify-between py-2 group">
-                          {isTopwear ? (
-                            <button
-                              onClick={() => setTopwearExpanded(!topwearExpanded)}
-                              className="flex items-center space-x-3 text-left text-2xl md:text-3xl font-extrabold uppercase tracking-wide text-black hover:text-black/60 transition-colors"
-                              style={{ fontFamily: 'var(--font-heading), sans-serif' }}
-                            >
-                              <span>{category.label}</span>
-                              <svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2.5"
-                                className={`w-4 h-4 transition-transform duration-300 ${topwearExpanded ? 'rotate-180' : ''}`}
+                      return (
+                        <motion.div
+                          key={category.label}
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: idx * 0.05 }}
+                          className="flex flex-col"
+                        >
+                          <div className="flex items-center justify-between group">
+                            {isTopwear ? (
+                              <button
+                                onClick={() => setTopwearExpanded(!topwearExpanded)}
+                                className="flex items-center text-left text-xl md:text-2xl font-extrabold uppercase tracking-[0.1em] text-black hover:opacity-60 transition-opacity"
                               >
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                              </svg>
-                            </button>
-                          ) : (
-                            <a
-                              href={category.href}
-                              onClick={(e) => {
-                                setActiveCategory(category.label);
-                                handleLinkClick(e, category.href);
-                              }}
-                              className="flex items-center space-x-2 text-2xl md:text-3xl font-extrabold uppercase tracking-wide text-black hover:text-black/60 transition-colors"
-                              style={{ fontFamily: 'var(--font-heading), sans-serif' }}
-                            >
-                              <span>{category.label}</span>
-                              {isActive && (
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-4 h-4 text-black inline ml-2">
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                <span>{category.label}</span>
+                                <svg
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="1.5"
+                                  className={`w-4 h-4 ml-3 transition-transform duration-300 ${topwearExpanded ? 'rotate-180' : ''}`}
+                                >
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                                 </svg>
-                              )}
-                            </a>
-                          )}
-                        </div>
-
-                        {/* Expandable Submenu for TOPWEAR */}
-                        {isTopwear && (
-                          <AnimatePresence>
-                            {topwearExpanded && (
-                              <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: 'auto', opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.3, ease: 'easeInOut' }}
-                                className="overflow-hidden pl-4 flex flex-col space-y-2 mt-4 border-l border-black/10"
+                              </button>
+                            ) : (
+                              <a
+                                href={category.href}
+                                onClick={(e) => {
+                                  setActiveCategory(category.label);
+                                  handleLinkClick(e, category.href);
+                                }}
+                                className="flex items-center text-xl md:text-2xl font-extrabold uppercase tracking-[0.1em] text-black hover:opacity-60 transition-opacity"
                               >
-                                {[
-                                  { name: 'HOODIES & SWEATSHIRTS', href: '#chapters' },
-                                  { name: 'T-SHIRTS & TEES', href: '#chapters' },
-                                  { name: 'JACKETS & OUTERWEAR', href: '#chapters' },
-                                  { name: 'SHIRTS', href: '#chapters' },
-                                ].map((sub) => (
-                                  <a
-                                    key={sub.name}
-                                    href={sub.href}
-                                    onClick={(e) => {
-                                      setActiveCategory('TOPWEAR');
-                                      handleLinkClick(e, sub.href);
-                                    }}
-                                    className="text-xs md:text-sm font-bold tracking-widest text-black/60 hover:text-black transition-colors uppercase"
-                                  >
-                                    {sub.name}
-                                  </a>
-                                ))}
-                              </motion.div>
+                                <span>{category.label}</span>
+                                {isActive && (
+                                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-4 h-4 text-black inline ml-2">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                  </svg>
+                                )}
+                              </a>
                             )}
-                          </AnimatePresence>
-                        )}
-                      </motion.div>
-                    );
-                  })}
+                          </div>
+
+                          {/* Expandable Submenu for TOPWEAR */}
+                          {isTopwear && (
+                            <AnimatePresence>
+                              {topwearExpanded && (
+                                <motion.div
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: 'auto', opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                                  className="overflow-hidden pl-4 flex flex-col space-y-4 mt-6 border-l border-black/10"
+                                >
+                                  {[
+                                    { name: 'HOODIES & SWEATSHIRTS', href: '#chapters' },
+                                    { name: 'T-SHIRTS & TEES', href: '#chapters' },
+                                    { name: 'JACKETS & OUTERWEAR', href: '#chapters' },
+                                    { name: 'SHIRTS', href: '#chapters' },
+                                  ].map((sub) => (
+                                    <a
+                                      key={sub.name}
+                                      href={sub.href}
+                                      onClick={(e) => {
+                                        setActiveCategory('TOPWEAR');
+                                        handleLinkClick(e, sub.href);
+                                      }}
+                                      className="text-[0.8rem] font-bold tracking-[0.15em] text-black/60 hover:text-black transition-colors uppercase"
+                                    >
+                                      {sub.name}
+                                    </a>
+                                  ))}
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          )}
+                        </motion.div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Social Icons — fixed spacing */}
+                  <div className="flex flex-col space-y-4">
+                    <a href="#" className="flex items-center space-x-3 text-black hover:opacity-60 transition-opacity duration-300" aria-label="Instagram">
+                      <InstagramIcon />
+                      <span className="text-[0.75rem] font-bold tracking-[0.2em] uppercase">Instagram</span>
+                    </a>
+                    <a href="#" className="flex items-center space-x-3 text-black hover:opacity-60 transition-opacity duration-300" aria-label="Email">
+                      <EmailIcon />
+                      <span className="text-[0.75rem] font-bold tracking-[0.2em] uppercase">Email</span>
+                    </a>
+                    <a href="#" className="flex items-center space-x-3 text-black hover:opacity-60 transition-opacity duration-300" aria-label="Phone">
+                      <PhoneIcon />
+                      <span className="text-[0.75rem] font-bold tracking-[0.2em] uppercase">Phone</span>
+                    </a>
+                  </div>
                 </div>
 
-                {/* Social Icons — stacked vertically below categories */}
-                <div className="flex flex-col space-y-[40px] mt-16">
-
-                  <a href="#" className="flex items-center space-x-3 text-black/60 hover:text-black transition-colors duration-300" aria-label="Instagram">
-                    <InstagramIcon />
-                    <span className="text-xs font-bold tracking-[0.2em] uppercase">Instagram</span>
-                  </a>
-                  <a href="#" className="flex items-center space-x-3 text-black/60 hover:text-black transition-colors duration-300" aria-label="Email">
-                    <EmailIcon />
-                    <span className="text-xs font-bold tracking-[0.2em] uppercase">Email</span>
-                  </a>
-                  <a href="#" className="flex items-center space-x-3 text-black/60 hover:text-black transition-colors duration-300" aria-label="Phone">
-                    <PhoneIcon />
-                    <span className="text-xs font-bold tracking-[0.2em] uppercase">Phone</span>
-                  </a>
-                  <div className="bg-black/20 flex w-35 pt-6 mt-20 ">
+                <div className="mt-20 w-full flex justify-center pb-8">
+                  <div className="w-full max-w-[280px]">
                     <button
                       onClick={() => {
                         setMenuOpen(false);
                         setAccountOpen(true);
                       }}
-                      className="text-[0.7rem] font-bold tracking-[0.2em] text-black hover:opacity-60 transition-opacity uppercase"
+                      className="w-full border border-black py-[14px] flex items-center justify-center text-[0.7rem] font-bold tracking-[0.25em] text-black hover:bg-black hover:text-white transition-colors uppercase"
                     >
-                      LOG IN / REGISTER
+                      LOGIN / REGISTER
                     </button>
                   </div>
-
                 </div>
               </div>
-
-              {/* Login / Register at the very bottom, centered */}
-
-
             </motion.div>
           </>
         )}
