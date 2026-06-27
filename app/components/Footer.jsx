@@ -5,7 +5,7 @@ import { motion, useInView } from 'framer-motion';
 
 /* ─── Inline SVG Icons ─── */
 const ReturnsIcon = () => (
-  <svg width="40" height="40" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+  <svg width="44" height="44" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.2">
     <circle cx="24" cy="24" r="20" />
     <path d="M24 14v10l6 4" strokeLinecap="round" strokeLinejoin="round" />
     <path d="M16 10l-3 4 4 3" strokeLinecap="round" strokeLinejoin="round" />
@@ -13,13 +13,13 @@ const ReturnsIcon = () => (
 );
 
 const PhoneSupportIcon = () => (
-  <svg width="40" height="40" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+  <svg width="44" height="44" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.2">
     <path d="M36 30.6v3.6a2.4 2.4 0 01-2.616 2.4A23.76 23.76 0 0120.4 31.8a23.4 23.4 0 01-7.2-7.2A23.76 23.76 0 018.4 11.616 2.4 2.4 0 0110.788 9.2h3.6a2.4 2.4 0 012.4 2.064 15.408 15.408 0 00.84 3.372 2.4 2.4 0 01-.54 2.532l-1.524 1.524a19.2 19.2 0 007.2 7.2l1.524-1.524a2.4 2.4 0 012.532-.54 15.408 15.408 0 003.372.84 2.4 2.4 0 012.064 2.436z" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 const ShippingIcon = () => (
-  <svg width="40" height="40" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+  <svg width="44" height="44" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.2">
     <path d="M8 28V16a2 2 0 012-2h18a2 2 0 012 2v12" strokeLinecap="round" strokeLinejoin="round" />
     <path d="M30 20h5.2a2 2 0 011.6.8l3.8 5.067V28a2 2 0 01-2 2h-1" strokeLinecap="round" strokeLinejoin="round" />
     <circle cx="14" cy="32" r="3" />
@@ -59,41 +59,46 @@ export default function Footer() {
   const footerRef = useRef(null);
   const isInView = useInView(footerRef, { once: true, margin: '-50px' });
 
+  const ease = [0.16, 1, 0.3, 1];
+
   return (
-    <footer ref={footerRef} className="bg-white text-black font-ui overflow-hidden" style={{ fontFamily: 'var(--font-ui)' }}>
+    <footer
+      ref={footerRef}
+      className="ks-footer"
+    >
       {/* ══════ Top Info Bar ══════ */}
-      <div className="border-y border-zinc-200 py-14 px-6 md:px-10 lg:px-16">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+      <div className="ks-footer-info-bar">
+        <div className="ks-footer-info-grid">
           {/* Returns */}
           <motion.div
-            className="flex flex-col items-center text-center"
+            className="ks-footer-info-col"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, ease }}
           >
-            <div className="text-zinc-900 mb-4">
+            <div className="ks-footer-info-icon">
               <ReturnsIcon />
             </div>
-            <h4 className="text-[0.85rem] font-bold tracking-[0.02em] mb-2.5 text-black uppercase" style={{ fontFamily: 'var(--font-ui)' }}>Returns</h4>
-            <p className="text-[0.78rem] font-normal leading-[1.7] text-zinc-700 max-w-[280px] m-0">
+            <h4 className="ks-footer-info-title">Returns</h4>
+            <p className="ks-footer-info-text">
               Please read our{' '}
-              <a href="#" className="text-black underline underline-offset-2 font-medium hover:opacity-60 transition-opacity">Return &amp; Exchange Policy</a>{' '}
+              <a href="#" className="ks-footer-link">Return &amp; Exchange Policy</a>{' '}
               before purchasing.
             </p>
           </motion.div>
 
           {/* Customer Support */}
           <motion.div
-            className="flex flex-col items-center text-center"
+            className="ks-footer-info-col"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, delay: 0.1, ease }}
           >
-            <div className="text-zinc-900 mb-4">
+            <div className="ks-footer-info-icon">
               <PhoneSupportIcon />
             </div>
-            <h4 className="text-[0.85rem] font-bold tracking-[0.02em] mb-2.5 text-black uppercase" style={{ fontFamily: 'var(--font-ui)' }}>Customer Support</h4>
-            <p className="text-[0.78rem] font-normal leading-[1.7] text-zinc-700 max-w-[280px] m-0">
+            <h4 className="ks-footer-info-title">Customer Support</h4>
+            <p className="ks-footer-info-text">
               Support hours: 12 PM – 6 PM<br />
               Monday to Saturday<br />
               +91 836-995-0066
@@ -102,44 +107,38 @@ export default function Footer() {
 
           {/* Shipping */}
           <motion.div
-            className="flex flex-col items-center text-center"
+            className="ks-footer-info-col"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, delay: 0.2, ease }}
           >
-            <div className="text-zinc-900 mb-4">
+            <div className="ks-footer-info-icon">
               <ShippingIcon />
             </div>
-            <h4 className="text-[0.85rem] font-bold tracking-[0.02em] mb-2.5 text-black uppercase" style={{ fontFamily: 'var(--font-ui)' }}>Shipping</h4>
-            <p className="text-[0.78rem] font-normal leading-[1.7] text-zinc-700 max-w-[280px] m-0">
+            <h4 className="ks-footer-info-title">Shipping</h4>
+            <p className="ks-footer-info-text">
               Please review our{' '}
-              <a href="#" className="text-black underline underline-offset-2 font-medium hover:opacity-60 transition-opacity">Shipping Policy</a>.
+              <a href="#" className="ks-footer-link">Shipping Policy</a>.
             </p>
           </motion.div>
         </div>
       </div>
 
       {/* ══════ Footer Bottom ══════ */}
-      <div className="pt-16 pb-8 px-6 md:px-10 lg:px-16">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_1fr_1.5fr] gap-10 md:gap-8 items-start">
+      <div className="ks-footer-bottom">
+        <div className="ks-footer-bottom-grid">
+
           {/* Quick Links */}
           <motion.div
-            className="flex flex-col"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, delay: 0.25, ease }}
           >
-            <h5 className="text-[0.82rem] font-bold tracking-[0.01em] mb-5 text-black underline underline-offset-4 decoration-[1px]" style={{ fontFamily: 'var(--font-ui)' }}>Quick links</h5>
-            <ul className="flex flex-col gap-2.5 p-0 m-0 list-none">
-              {[
-                { label: 'Contact Us', href: '#' },
-                { label: 'Returns and Refunds', href: '#' },
-                { label: 'Policies', href: '#' },
-                { label: 'Delivery', href: '#' },
-                { label: 'Press', href: '#' },
-              ].map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-[0.78rem] font-normal text-zinc-700 hover:text-black transition-colors">{link.label}</a>
+            <h5 className="ks-footer-col-title">Quick links</h5>
+            <ul className="ks-footer-list">
+              {['Contact Us', 'Returns and Refunds', 'Policies', 'Delivery', 'Press'].map((label) => (
+                <li key={label}>
+                  <a href="#" className="ks-footer-list-link">{label}</a>
                 </li>
               ))}
             </ul>
@@ -147,69 +146,54 @@ export default function Footer() {
 
           {/* Follow Us */}
           <motion.div
-            className="flex flex-col"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, delay: 0.3, ease }}
           >
-            <h5 className="text-[0.82rem] font-bold tracking-[0.01em] mb-5 text-black underline underline-offset-4 decoration-[1px]" style={{ fontFamily: 'var(--font-ui)' }}>Follow us</h5>
-            <ul className="flex flex-col gap-3 p-0 m-0 list-none">
-              <li>
-                <a href="#" className="inline-flex items-center gap-2.5 text-[0.78rem] font-normal text-zinc-700 hover:text-black transition-colors">
-                  <YouTubeSmall />
-                  <span>YouTube</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="inline-flex items-center gap-2.5 text-[0.78rem] font-normal text-zinc-700 hover:text-black transition-colors">
-                  <InstagramSmall />
-                  <span>Instagram</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="inline-flex items-center gap-2.5 text-[0.78rem] font-normal text-zinc-700 hover:text-black transition-colors">
-                  <EmailSmall />
-                  <span>Email</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="inline-flex items-center gap-2.5 text-[0.78rem] font-normal text-zinc-700 hover:text-black transition-colors">
-                  <PhoneSmall />
-                  <span>Phone</span>
-                </a>
-              </li>
+            <h5 className="ks-footer-col-title">Follow us</h5>
+            <ul className="ks-footer-list">
+              {[
+                { icon: <YouTubeSmall />, label: 'YouTube' },
+                { icon: <InstagramSmall />, label: 'Instagram' },
+                { icon: <EmailSmall />, label: 'Email' },
+                { icon: <PhoneSmall />, label: 'Phone' },
+              ].map((item) => (
+                <li key={item.label}>
+                  <a href="#" className="ks-footer-social-link">
+                    {item.icon}
+                    <span>{item.label}</span>
+                  </a>
+                </li>
+              ))}
             </ul>
           </motion.div>
 
-          {/* Brand Logo */}
+          {/* Brand Logo — right column, right-aligned */}
           <motion.div
-            className="flex md:justify-end items-start md:col-auto col-span-full justify-center text-center md:text-right mt-8 md:mt-0"
+            className="ks-footer-brand-col"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, delay: 0.35, ease }}
           >
-            <div className="flex flex-col leading-[0.92]">
-              <span className="text-[clamp(2.5rem,5.5vw,4.5rem)] font-extrabold tracking-[0.03em] text-black uppercase" style={{ fontFamily: 'var(--font-heading)' }}>
-                KNOWN<sup className="text-[0.35em] align-super font-bold">®</sup>
-              </span>
-              <span className="text-[clamp(2.5rem,5.5vw,4.5rem)] font-extrabold tracking-[0.03em] text-black uppercase" style={{ fontFamily: 'var(--font-heading)' }}>
-                STRANGERS
-              </span>
+            <div className="ks-footer-brand-logo">
+              <img
+                src="/images/Black-logo.svg"
+                alt="KNOWN STRANGERS"
+              />
             </div>
           </motion.div>
+
         </div>
       </div>
 
-      {/* ══════ Tagline ══════ */}
+      {/* Tagline */}
       <motion.div
-        className="text-center pt-10 pb-12 px-6"
+        className="ks-footer-tagline"
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 1, delay: 0.5 }}
       >
-        <p className="text-[1.1rem] font-light italic text-zinc-600 tracking-[0.02em] m-0" style={{ fontFamily: 'var(--font-display)' }}>
-          Here every piece is made with love for loved ones
-        </p>
+        <p>Here every piece is made with love for loved ones</p>
       </motion.div>
     </footer>
   );

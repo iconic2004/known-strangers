@@ -481,6 +481,209 @@ html.lenis body {
   }
 }
 
+/* ---------- Footer — Known Strangers ---------- */
+.ks-footer {
+  background: #ffffff;
+  color: #1a1a1a;
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* ── Info Bar ── */
+.ks-footer-info-bar {
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 3.5rem 2rem;
+}
+
+.ks-footer-info-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.ks-footer-info-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ks-footer-info-icon {
+  color: #1a1a1a;
+  margin-bottom: 0.75rem;
+}
+
+.ks-footer-info-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+  color: #000;
+}
+
+.ks-footer-info-text {
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #555;
+  max-width: 260px;
+  margin: 0;
+}
+
+.ks-footer-link {
+  color: #000;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 500;
+  transition: opacity 0.25s ease;
+}
+
+.ks-footer-link:hover {
+  opacity: 0.6;
+}
+
+/* ── Footer Bottom ── */
+.ks-footer-bottom {
+  padding: 2.5rem 3rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.ks-footer-bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.ks-footer-col-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #000;
+  margin: 0 0 12px 0;
+  letter-spacing: 0;
+}
+
+.ks-footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ks-footer-list li {
+  margin-bottom: 7px;
+}
+
+.ks-footer-list-link {
+  font-size: 13px;
+  color: #000;
+  text-decoration: none;
+}
+
+.ks-footer-list-link:hover {
+  text-decoration: underline;
+}
+
+.ks-footer-social-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #000;
+  text-decoration: none;
+}
+
+.ks-footer-social-link:hover {
+  text-decoration: underline;
+}
+
+.ks-footer-brand-col {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.ks-footer-brand-logo {
+  width: 100%;
+  max-width: 320px;
+}
+
+.ks-footer-brand-logo img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.ks-footer-tagline {
+  border-top: 1px solid #e0e0e0;
+  padding: 1.5rem 3rem;
+  text-align: center;
+}
+
+.ks-footer-tagline p {
+  font-size: 15px;
+  color: #555;
+  margin: 0;
+}
+
+.ks-footer-tagline p {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 300;
+  font-style: italic;
+  color: #555;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+/* ── Footer Mobile ── */
+@media (max-width: 768px) {
+  .ks-footer-info-bar {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .ks-footer-info-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .ks-footer-bottom {
+    padding: 2.5rem 1.5rem 1.5rem;
+  }
+
+  .ks-footer-bottom-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .ks-footer-brand-col {
+    justify-content: center;
+  }
+
+  .ks-footer-brand-logo {
+    text-align: center;
+  }
+
+  .ks-footer-brand-text {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .ks-footer-tagline {
+    text-align: center;
+    padding: 2rem 1.5rem 2.5rem;
+  }
+
+  .ks-footer-tagline p {
+    font-size: 0.95rem;
+    font-style: normal;
+    font-weight: 400;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    color: #555;
+  }
+}
+
 /* ---------- Section Transitions ---------- */
 .section-reveal {
   opacity: 0;
